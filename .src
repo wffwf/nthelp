@@ -1,0 +1,3 @@
+export NTHOME=$(pwd)
+chmod +x ./busybox
+./busybox cp ./busybox /usr/bin/busybox
