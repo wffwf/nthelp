@@ -1,21 +1,21 @@
-# 已实现自动执行的功能说明
+# nthelp
 ## 初始化busybox
 ```bash
 source .src
 # 或者执行以下
 chmod +x ./busybox
 ```
-## 检测dpkg感染，加入预检查自动脚本
+## 检测dpkg感染
 + 用于验证已经安装在系统中的软件包的完整性，是否涉及篡改
 + 当软件包中的可执行文件被恶意修改了内容，dpkg -V可以检测到文件内容的 MD5 哈希值与原始安装记录不一致，从而提醒用户系统可能存在安全风险。
 ```bash
 dpkg -V
 ```
-## 检查PATH，加入预检查自动脚本
+## 检查PATH
 ```bash
 busybox env | busybox grep PATH
 ```
-## 检查并清除泄露文件，加入预检查自动脚本
+## 检查并清除泄露文件
 ```bash
 # robots.txt
 busybox cat /var/www/html/robots.txt
