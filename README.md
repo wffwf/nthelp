@@ -317,7 +317,17 @@ WantedBy=multi-user.target
 1. apachctl -k restart
 ### 2.1.2 查看与某文件同一天修改的其他文件
 find /var/www/html -type f -exec grep -q -s -F -H -e "" --null {} + | xargs -0 ls -l
-
+### 2.1.3 Linux账户密码安全策略
+1. 密码过期时间设置vim /etc/login.def `PASS_MAX_DAYS 90`
+2. 连续输入错误三次，锁定5分钟
+```bash
+vim /etc/pam.d/sshd
+auth required pam_tally.so deny=3 onerr=fail unlock_time=300 #最后一行添加配置文件
+auth required pam_faillock.so pre
+auth audit silent deny=3 unlock_time=300
+auth required pam_faillock.so authfail audit deny=3 unlock_time=300
+```
+或者修改 /etc/pam.d/common-auth
 ## 2.2 Windows
 ### 合集
 ```bash
